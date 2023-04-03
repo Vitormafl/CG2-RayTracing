@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "./Source/Image.hpp"
 #include "./Source/Scene.hpp"
+#include "./Source/camera.hpp"
 
 class App
 {
@@ -16,6 +17,9 @@ class App
     void OnLoop();
     void OnRender();
     void OnExit();
+
+  private:
+    void PrintVector(const qbVector<double> &inputVector);
 
   private:
     Image m_image;

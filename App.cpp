@@ -26,7 +26,27 @@ bool App::OnInit()
 		// Initialise the qbImage instance.
 		m_image.Initialize(1280, 720, pRenderer);
 		
+		RT::Camera testCamera;
+		testCamera.SetPosition(qbVector<double>(std::vector<double>{0.0, 0.0, 0.0}));
+		testCamera.SetLookAt(qbVector<double>(std::vector<double>{0.0, 2.0, 0.0}));
+		testCamera.SetUp(qbVector<double>(std::vector<double>{0.0, 0.0, 1.0}));
+		testCamera.SetLength(1.0);
+		testCamera.SetHorzSize(1.0);
+		testCamera.SetAspect(1.0);
+		testCamera.UpdateCameraGeometry();
 		
+		// Get the screen centre and U,V vectors and display.
+		auto screenCentre = testCamera.GetScreenCentre();
+		auto screenU = testCamera.GetU();
+		auto screenV = testCamera.GetV();
+		
+		// And display to the terminal.
+		std::cout << "Camera screen centre:" << std::endl;
+		PrintVector(screenCentre);
+		std::cout << "\nCamera U vector:" << std::endl;
+		PrintVector(screenU);
+		std::cout << "\nCamera V vector:" << std::endl;
+		PrintVector(screenV);
 	}
 	else
 	{
@@ -96,4 +116,13 @@ void App::OnExit()
 	SDL_DestroyWindow(pWindow);
 	pWindow = NULL;
 	SDL_Quit();
+}
+
+void App::PrintVector(const qbVector<double> &inputVector)
+{
+	int nRows = inputVector.GetNumDims();
+	for (int row = 0; row<nRows; ++row)
+  {
+  std::cout << std::fixed << std::setprecision(3) << inputVector.GetElement(row) << std::endl;
+	} 	
 }
