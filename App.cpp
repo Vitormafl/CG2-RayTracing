@@ -1,4 +1,3 @@
-
 #include "App.h"
 
 // The constructor (default)
@@ -26,27 +25,18 @@ bool App::OnInit()
 		// Initialise the qbImage instance.
 		m_image.Initialize(1280, 720, pRenderer);
 		
-		RT::Camera testCamera;
-		testCamera.SetPosition(qbVector<double>(std::vector<double>{0.0, 0.0, 0.0}));
-		testCamera.SetLookAt(qbVector<double>(std::vector<double>{0.0, 2.0, 0.0}));
-		testCamera.SetUp(qbVector<double>(std::vector<double>{0.0, 0.0, 1.0}));
-		testCamera.SetLength(1.0);
-		testCamera.SetHorzSize(1.0);
-		testCamera.SetAspect(1.0);
-		testCamera.UpdateCameraGeometry();
+		// Configurar a cor de background
+		SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
+		SDL_RenderClear(pRenderer);
 		
-		// Get the screen centre and U,V vectors and display.
-		auto screenCentre = testCamera.GetScreenCentre();
-		auto screenU = testCamera.GetU();
-		auto screenV = testCamera.GetV();
+		// Renderizar a cena
+		m_scene.Render(m_image);
 		
-		// And display to the terminal.
-		std::cout << "Camera screen centre:" << std::endl;
-		PrintVector(screenCentre);
-		std::cout << "\nCamera U vector:" << std::endl;
-		PrintVector(screenU);
-		std::cout << "\nCamera V vector:" << std::endl;
-		PrintVector(screenV);
+		// Diplay na imagem
+		m_image.Display();
+		
+		// Mostrar o resultado
+		SDL_RenderPresent(pRenderer);
 	}
 	else
 	{
@@ -96,17 +86,17 @@ void App::OnLoop()
 void App::OnRender()
 {
 	// Set the background colour to white.
-	SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
-	SDL_RenderClear(pRenderer);
+	//SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
+	//SDL_RenderClear(pRenderer);
 
 	//Render the Scene
-	m_scene.Render(m_image);
+	//m_scene.Render(m_image);
 	
 	// Display the image.
-	m_image.Display();
+	//m_image.Display();
 	
 	// Show the result.
-	SDL_RenderPresent(pRenderer);
+	//SDL_RenderPresent(pRenderer);
 }
 
 void App::OnExit()

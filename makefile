@@ -6,7 +6,7 @@ LIBS = -lSDL2
 
 # Definir as flags.
 # CFLAGS = -std=c++17 -pg
-CFLAGS = -std=c++17
+CFLAGS = -std=c++17 -Ofast
 
 # Define the object files that we need to use.
 objects = main.o \
